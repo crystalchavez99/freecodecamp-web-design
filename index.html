@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FreeCodeCamp - Responsive Design Work</title>
+    </head>
+    <body>
+        <h1>Crystal Chavez - FreeCodeCamp Works Completed</h1>
+        <div class="learning-path">
+            <h2>Responsive Web Design Certification</h2>
+            <div class="course">
+                <h3>HTML</h3>
+                <div class="section">
+                    <h4>Basic HTML</h4>
+                    <ul id="basic-html-projects" class="project-list"></ul>
+                </div>
+                <div class="section">
+                    <h4>Semantic HTML</h4>
+                    <ul id="semantic-html-projects" class="project-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const projectsByCategory = {
+                "Basic HTML": [
+                    "basicHTML/basic-curriculum-page",
+                    "basicHTML/bookstore-page",
+                    "basicHTML/cat-photo-app",
+                    "basicHTML/debug",
+                    "basicHTML/i-frame",
+                    "basicHTML/i-frame-compilation",
+                    "basicHTML/itinerary-project",
+                    "basicHTML/music-player",
+                    "basicHTML/music-video-player",
+                    "basicHTML/takoyaki"
+                ],
+                "Semantic HTML": [
+                    "semanticHTML/browser-list",
+                    "semanticHTML/build-quincys-page"
+                ]
+            };
+
+            function formatProjectName(folderPath) {
+                const folderName = folderPath.split("/").pop();
+                return folderName
+                    .split("-")
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(" ");
+            }
+
+            document.querySelectorAll(".section").forEach((section) => {
+                const heading = section.querySelector("h4");
+                const list = section.querySelector("ul");
+                const category = heading?.textContent.trim();
+                const projects = projectsByCategory[category] || [];
+
+                list.innerHTML = projects
+                    .map((projectPath) => {
+                        return `<li><a href="${projectPath}/index.html">${formatProjectName(projectPath)}</a></li>`;
+                    })
+                    .join("");
+            });
+        </script>
+    </body>
+</html>
